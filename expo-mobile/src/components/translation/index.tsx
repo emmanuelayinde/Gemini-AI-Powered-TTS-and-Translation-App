@@ -1,0 +1,1 @@
+export { default as LanguagesSwitch } from './languages-switch'
