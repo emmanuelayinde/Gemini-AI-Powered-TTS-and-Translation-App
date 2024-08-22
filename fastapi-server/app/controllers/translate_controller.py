@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from ..models.translate_model import TranslationRequest, TranslationResponse, LanguageDetectionRequest, LanguageDetectionResponse, SupportedLanguageResponse
-from ..services.translate_service import TranslateService
 from typing import List
+from app.models.translate_model import TranslationRequest, TranslationResponse, LanguageDetectionRequest, LanguageDetectionResponse, SupportedLanguageResponse
+from app.services.translation_service import TranslateService
 
 router = APIRouter()
 translate_service = TranslateService()
