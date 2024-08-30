@@ -49,10 +49,7 @@ const StyledCamera = () => {
                         <View className='mb-20'>
                             <TranslatedTextCard showLanguage={false} />
                         </View>
-                        <LanguagesSwitch
-                            languageToTranslateFrom='English'
-                            languageToTranslateTo='Chinese'
-                        />
+                        <LanguagesSwitch />
                     </View>
                     <TouchableOpacity className='bg-orange flex justify-center items-center absolute top-12 righ-12'>
 

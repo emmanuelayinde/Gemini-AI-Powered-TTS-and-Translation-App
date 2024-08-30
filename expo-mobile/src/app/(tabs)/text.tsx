@@ -9,11 +9,8 @@ const TextScreen = () => {
     return (
         <ScreenLayout label='Translator'>
             <ScrollView>
-                <View className='flex gap-8 p-4' >
-                    <LanguagesSwitch
-                        languageToTranslateFrom='English'
-                        languageToTranslateTo='French'
-                    />
+                <View className='flex gap-4 p-4' >
+                    <LanguagesSwitch />
                     <OriginalTextCard />
                     <TranslatedTextCard />
                 </View>

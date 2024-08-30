@@ -1,7 +1,7 @@
 from google.cloud import translate_v2 as translate
 from typing import List, Optional
 from app.models.translate_model import TranslationResponse, LanguageDetectionResponse, SupportedLanguageResponse
-
+from app.utils.translation_util import format_translated_text
 
 class TranslateService:
     def __init__(self):
@@ -14,7 +14,7 @@ class TranslateService:
             result = self.client.translate(text, target_language=target_language)
 
         return TranslationResponse(
-            translated_text=result["translatedText"],
+            translated_text=format_translated_text(result["translatedText"]),
             detected_language=result["detectedSourceLanguage"] if not source_language else None
         )
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, Button } from 'react-native'
-import useRecorder from '@/hooks/useRecorder'
+import { useRecorder } from '@/hooks'
 
 const VoiceNoteRecorder = () => {
     const { recording, startRecording, stopRecording, playSound, pauseSound, status } = useRecorder()

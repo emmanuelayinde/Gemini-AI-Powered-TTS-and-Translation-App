@@ -47,6 +47,7 @@ const useTTS = () => {
         getMaxSpeechLength()
     }, [])
 
+
     return {
         utterSpeech,
         setPlayBackSpeed,
@@ -58,7 +59,7 @@ const useTTS = () => {
         hasError: Boolean(error),
         playBackSpeed,
         maxSpeechLength,
-        error
+        error,
         // isSpeaking: status === 'speaking',
         // isPaused: status === 'speaking',
         // isStopped: status === 'speaking',

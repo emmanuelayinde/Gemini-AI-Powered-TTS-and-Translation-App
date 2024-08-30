@@ -1,35 +1,23 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View, Text } from 'react-native'
 import Octicons from '@expo/vector-icons/Octicons';
 
 import { IconButton } from '../common'
 import { theme } from '@/constants';
 import { useTranslation } from '@/hooks';
-import { getSupportedLanguages } from '@/services/translation';
 
-interface IProps {
-    languageToTranslateFrom: string,
-    languageToTranslateTo: string,
-}
 
-const LanguagesSwtich = ({ languageToTranslateFrom, languageToTranslateTo }: IProps) => {
-
-    const { fetchSupportedLanguages } = useTranslation()
-
-    useEffect(() => {
-        (async () => { const res = await getSupportedLanguages(); console.log({ res }) })()
-    }, [])
-
+const LanguagesSwtich = () => {
+    const { fetchSupportedLanguages, languageToTranslateFrom, languageToTranslateTo, switchLanguages } = useTranslation()
 
     const { data, error } = fetchSupportedLanguages
-
-    console.log({ error, data })
-
+    console.log({ data, error })
     return (
         <View >
             <View className='w-full h-20 px-8 py-4 rounded-lg bg-blue flex flex-row items-center justify-between'>
                 <Text className='w-1/3 text-center text-white text-2xl font-semibold capitalize'>{languageToTranslateFrom}</Text>
                 <IconButton
+                    handleOnPress={switchLanguages}
                     icon={<Switch />}
                 />
                 <Text className='w-1/3 text-center text-white text-2xl font-semibold capitalize'>{languageToTranslateTo}</Text>

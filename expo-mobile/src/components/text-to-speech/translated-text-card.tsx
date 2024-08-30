@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, Platform } from 'react-native'
 import Feather from '@expo/vector-icons/Feather';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { theme } from '@/constants';
 import { IconButton } from '@/components/common';
-import { useTTS } from '@/hooks';
+import { useClipboard, useTranslation, useTTS } from '@/hooks';
 
 interface IProps {
     showLanguage?: boolean
@@ -13,24 +14,30 @@ interface IProps {
 
 
 const OriginalTextCard = ({ showLanguage = true }: IProps) => {
-    const [text, _] = useState('Lorem ipsum dolor sit amet consectetur adipisicing elit.')
     const { utterSpeech, pauseSpeech, resumeSpeech, stopSpeech, status } = useTTS()
+    const { languageToTranslateTo, translationStatus, translationText } = useTranslation()
+    const { copied, copyToClipboard } = useClipboard()
 
     return (
         <View className='w-full min-h-80 px-4 py-6 gap-4 rounded-lg bg-blue'>
             {showLanguage && <View>
-                <Text className='text-xl text-gray font-semibold capitalize'>language</Text>
+                <Text className='text-xl text-gray font-semibold capitalize'>{languageToTranslateTo}</Text>
             </View>}
             <View className='w-full flex-1'>
                 <Text className='text-2xl text-white'>
-                    {text}
+                    {translationText}
                 </Text>
             </View>
-            {text && <View className='flex flex-row items-center justify-between'>
+            {translationText && <View className='flex flex-row items-center justify-between'>
                 <View className='flex flex-row gap-4'>
-                    <IconButton
-                        icon={<FontAwesome6 name="copy" size={24} color={theme.gray} />}
-                    />
+                    {copied ? <IconButton
+                        icon={<Ionicons name="checkmark-done" size={24} color={theme.gray} />}
+                    /> :
+                        <IconButton
+                            handleOnPress={async () => await copyToClipboard(translationText)}
+                            icon={<FontAwesome6 name={copied ? "" : "copy"} size={24} color={theme.gray} />}
+                        />
+                    }
                     <IconButton
                         icon={<Feather name="share-2" size={24} color={theme.gray} />}
                     />
@@ -56,7 +63,7 @@ const OriginalTextCard = ({ showLanguage = true }: IProps) => {
                 {(status === null || status === 'done' || status === 'stopped') &&
                     <IconButton
                         icon={<Feather name="volume-2" size={24} color={theme.gray} />}
-                        handleOnPress={() => utterSpeech({ text })}
+                        handleOnPress={() => utterSpeech({ text: translationText, language: 'fr' })}
                     />
                 }
             </View>}
