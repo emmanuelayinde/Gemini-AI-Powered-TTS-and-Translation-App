@@ -1,4 +1,4 @@
-from google.cloud import texttospeech
+from google.cloud import texttospeech_v1 as texttospeech
 from app.models.text_to_speech_model import TextToSpeechResponse, VoicesResponse, Voice
 import base64
 
