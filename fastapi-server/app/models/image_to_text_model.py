@@ -1,8 +1,9 @@
+from fastapi import File
 from pydantic import BaseModel
 from typing import List
 
 class ImageTextDetectionRequest(BaseModel):
-    image_url: str
+    image_url: File
 
 class ImageTextDetectionResponse(BaseModel):
     detected_text: str

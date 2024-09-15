@@ -12,10 +12,7 @@ const VoiceScreen = () => {
             <View className='flex gap-8 p-4' >
                 <VoiceNotePlayer />
                 <TranslatedTextCard />
-                <LanguagesSwitch
-                    languageToTranslateFrom='English'
-                    languageToTranslateTo='French'
-                />
+                <LanguagesSwitch />
             </View>
         </ScreenLayout>
     )
